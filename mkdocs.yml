@@ -1,4 +1,5 @@
-site_name: My Docs
+site_name: База знаний
 nav:
-  - Home: index.md
+  - Главная: index.md
+  - Git: git.md
   - Абаут: about.md
