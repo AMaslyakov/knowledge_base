@@ -1,5 +1,0 @@
-site_name: База знаний
-nav:
-  - Главная: index.md
-  - Git: git.md
-  - Абаут: about.md
