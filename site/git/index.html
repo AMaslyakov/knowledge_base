@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Git - База знаний</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">База знаний</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Git</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../about/" class="nav-link">Абаут</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../about/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#git" class="nav-link">Git</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Введение</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#gitlinux" class="nav-link">Пакеты git(linux)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#windows" class="nav-link">Установка в Windows</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#git_1" class="nav-link">Как хрянтся изменения внутри git</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Индекс</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">Идентификаторы объектов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">Отслеживание контент</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#vs" class="nav-link">Путь vs. Содержание</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pack-" class="nav-link">Pack-файлы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">Управление индексом</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#gitignore" class="nav-link">.gitignore</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="git">Git</h1>
+<h2 id="_1">Введение</h2>
+<p>Для любой ращработки требуется сохранение кода и контроль версий.
+утилита которая позволяет управлять и ослеживать разными версиями кода называется системой контроля версий.</p>
+<p>Рассмотрим прогорамму git, для управления контролем версий. </p>
+<h2 id="gitlinux">Пакеты git(linux)</h2>
+<p>Для переноса из других vcs, могут поьтребоваться пакеты:</p>
+<pre><code>git-arch
+git-cvs
+git-svn
+</code></pre>
+<p>Название пакетов в разных диструбутивах могут отличаться.</p>
+<p>Для графического представления истории репозиториия могут пригодиться пакеты:</p>
+<pre><code>git-gui
+gitk
+gitweb
+</code></pre>
+<p>Для отправки патчей посредством email понадобится пакет:</p>
+<pre><code>git-email
+</code></pre>
+<h2 id="windows">Установка в Windows</h2>
+<p>Для установки git в Windows. Можно установить:</p>
+<p><a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<p>Либо Cygwing git:</p>
+<p><a href="https://cygwing.com">https://cygwing.com</a></p>
+<p>Либо пакет msysGit:</p>
+<p><a href="https://gitforwindows.org/">https://gitforwindows.org/</a></p>
+<h2 id="git_1">Как хрянтся изменения внутри git</h2>
+<p>Данные репозитория хранятся в директории .git. Git управляет хрпнилищем объектов и индексом.</p>
+<p>Хранилище объектов содержит читыре типа объектов:</p>
+<ul>
+<li>BLOB(Binary Large Object) содержит данные без метаданных</li>
+<li>Деревья. Дерево представляет один уровень, записывает id блобов, имена путей, небольшие метаданные для всех файлов в каталоге</li>
+<li>Коммиты хранят метаданные изменений(имя автора, дату, сообщение коммита) Каждый коммит ссылается на снимок состояния репозитория (объект дерева). Обычные коммиты имеют одного родителя, но возможны и коммиты с несколькими родителями (например, при слиянии веток).  </li>
+<li>Теги человекчитаемое имя назначемое объекту, обычно коммитам. Например Ver.-1.0</li>
+</ul>
+<h2 id="_2">Индекс</h2>
+<p>В git это временный и динамический бинарный файл, который описывает структуру каталогов всего репозитория. В частности, индекс получает версию полной структуры проекта в некоторый момент времени.</p>
+<p>Git позволяет изменять содержимое индекса четко определенными действиями.</p>
+<p>Индекс хранит изменения до коммита.
+Изменяется с помощью добавления, удаления, редактирования фпйлов.</p>
+<h2 id="_3">Идентификаторы объектов</h2>
+<p>Хранилище объектов git оргонизовано в виде ассоциативной системы хранения. Каждому объекту присвается уникальное имя - идентификатор, на основе алгоритма SHA1. Идентфикатор объекта представляется в виде 40-разрядного 16-ричного числа. Часто его еще называют <em>хэшкод</em>.
+Хэшкод вычисляется на основе содержимого объекта. Если содержимое объектов идентично они имеют одинаковый хэшкод.</p>
+<h2 id="_4">Отслеживание контент</h2>
+<p>Благодаря идентификаторам, git может отслеживать контент. Если в репозитории существует два идентичных файла, то для них в хранилище будет создан один BLOB с хэшкодом вычесленным на основе содержимого.</p>
+<p>Если один из файлов после изменений будет иметь отличия, соотвественно создаться новый BLOB с новым идентфикатором объекта.</p>
+<h2 id="vs">Путь vs. Содержание</h2>
+<p>Git имеет собственную структуру хранилища, которая не основыается на именах и путях файлов. Внутряння структура git более эффективна для собственных операций над объектами. И лга позволяет точно воспроизвести файлы и каталоги проекты проинднксированные хэшом.</p>
+<h2 id="pack-">Pack-файлы</h2>
+<p>Git умно упаковывает файлы. Он находит файлы похожие по содержанию и сохраняет полностью только один файл. Другой файл слхраняется в хранилище в виде дельты, т.е. сохраняется только разница содержимового между первым и вторым файлом.</p>
+<h2 id="_5">Управление индексом</h2>
+<p>Состояние индекса можно узнать в любой момент с помощью коианды:</p>
+<p><code>git status</code></p>
+<p>Файлы классифицируются на:</p>
+<ul>
+<li>отслеживаемые(tracked)</li>
+<li>игнорируемые(ignored)</li>
+<li>неотслеживаемые(untracked)</li>
+</ul>
+<p><em>Отслеживаемые</em> файлы уже находятся в репозитории</p>
+<p><em>Игнорируемые</em> явно объявленые файлы и деректории в .gitignore </p>
+<p><em>Неотслеживаемые</em> файлы которые не добавлены в индекс и отсутвуют в .gitignore</p>
+<h3 id="git-add">git add</h3>
+<p>Добавляет файл(ы) в индекс. Т.е. файл(ы) становится отслеживаемым(и). Также добавляет изменения для уже отслеживаемых файлов.</p>
+<h3 id="git-commit">git commit</h3>
+<p>Производится фиксация изменений добавленых в индекс.</p>
+<p>Команда <code>git commit --all</code> автоматически добавляет в индекс изменения отслеживаемых файлов и сразу создает коммит. Не отслеживаемые файлы при этом не меняют свой статус.</p>
+<p>Если не указать опцию <code>-m</code> git запустит редактор указанный в конфигурации для создания коммита.</p>
+<h3 id="git-rm">git rm</h3>
+<p>Команда удаляет файлы из индекса и из каталога. Либо удаляет файлы только  из индекса. Не может удалить файлы только с диска(для этого нужно использовать системную команду), т.е. команда работает только с файлами добавлеными в репозиторий.</p>
+<p>Команда:</p>
+<p><code>git rm --cached</code></p>
+<p>Удаляет файл из индекса. Т.е. делает файл неотслеживаемым. </p>
+<p>Но команда <code>git rm</code> удалит файл и из индекса и с диска до коммита и после коммита.</p>
+<p>Команда:</p>
+<p><code>git rm -f</code> </p>
+<p>Удалит даже отслеживаемый модифицированный файл не добавленый в индекс.</p>
+<p>Для востановления файла удаленного командой <code>git rm</code> можно испоьзовать механизм востановления файлов:</p>
+<p><code>git checkout HEAD -- &lt;file&gt;</code></p>
+<h3 id="git-mv">git mv</h3>
+<p>Позволяет перемещать и переименовывать файлы находящиеся репозитории или в индексе.</p>
+<p>Синтаксис:</p>
+<p><code>git mv  &lt;file1&gt; &lt;file2&gt;</code></p>
+<h2 id="gitignore">.gitignore</h2>
+<p>Содержит список файлов и шаблонов которые нужно игнорировать. </p>
+<h3 id="gitignore_1">Формат .gitignore</h3>
+<p><code># Files</code> -- коментарий</p>
+<p><code>\#file.txt</code> -- если название фацла начинается с решетки</p>
+<p><code>file.txt</code> -- имена файлов полном виде</p>
+<p><code>dir/</code> -- каталог отмечатся следующим образом</p>
+<p><code>*</code> -- заменяет любые символы</p>
+<p>Например:</p>
+<p><code>*.txt</code> -- игнорировать все файлы смрасширением .txt</p>
+<p><code>!</code> --- задает исключение для общего правила заданого с помощью предшествующего правила.</p>
+<p>Например:</p>
+<pre><code>logs/
+!logs/log.txt
+</code></pre>
+<p>Игнорирует папку logs и все содержимое. но отслеживает logs/log.txt</p>
+<pre><code>*.txt
+!history.txt
+</code></pre>
+<p>Игнорирует все файлы txt, но отслеживает history.txt</p>
+<p>Файлы .gitignore можно создавать в любом каталоге репозитория. Каждый файл влияет только на свой каталог и все подкаталоги. Правила .gitignore каскадные, определив общее правило в каталоге высокого уровня, его можно отменять с помощью <code>!</code> в подкаталогах.</p>
+<h3 id="_6">Приоритет игнорирования</h3>
+<ul>
+<li>Шаблоны определенные в командной строке ???</li>
+<li>Шаблоны из файла в верхнем каталоге</li>
+<li>Шаблоны в родительских каталогах, они будут перезаписаны с помощью .gitignore более высокого уровня</li>
+<li>Шаблоны из файла .git/info/exclude</li>
+<li>Шаблоны из файла указанного переменной конфигурации core.excludefile  </li>
+</ul>
+<p>exclude -- содержит шаблоны как и в .gitignore. Позволяет игнорировать специфичные файлы хаоактерные для операционной системы или ПО, но в .gitignore репозитория отмечать файлы характерные только для его специфики. </p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
