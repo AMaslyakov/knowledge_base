@@ -4,6 +4,8 @@ nav:
   - Git:
     - Теория: git.md
     - Справочник команд: commands.md
+  - Java:
+    - Spring и Spring Boot: spring.md
   - Абаут: about.md
 
 theme:
