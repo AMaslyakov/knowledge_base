@@ -85,6 +85,20 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_7">Коммиты(фиксации)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">Атомарные наборы изменений</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">Исходное состояние</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1">Пример 1: Неатомарный перенос (код не работает)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">Пример 2: Атомарный перенос (код работает)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_10">Идентификация фиксаций.</a>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../commands/">Справочник команд</a>
@@ -237,6 +251,88 @@ gitweb
 <li>Шаблоны из файла указанного переменной конфигурации <code>core.excludefile</code>  </li>
 </ul>
 <p><em>exclude</em> -- содержит шаблоны как и в .gitignore. Позволяет игнорировать специфичные файлы характерные для операционной системы или ПО, но в .gitignore репозитория отмечать файлы характерные только для его специфики.</p>
+<h2 id="_7">Коммиты(фиксации)</h2>
+<p>Коммит это добавление изменений в репозитрий. Git сравнивает ткущее состояние индекса с предыдущим и получает список добавленых/измененых/удаленных файлов
+/каталогов. Если файл/каталог изменился создается новый BLOB, если не изменился используются имеющиеся блобы.</p>
+<p>Коммиты объденяются в цепочку, в которой каждый новый коммит указывает на превдшественика.</p>
+<p>Коммит это единственный способ представления изменений в репозиторий.</p>
+<p>Git нормально относится к частым коммитам и обеспечивает богатый набор комманд для управления ими.</p>
+<h3 id="_8">Атомарные наборы изменений</h3>
+<p>Разработчик отправляющий изменения в репозиторий должен стремится чтобы каждый коммит представлял собой атомарный(неделимый) набор изменений не зависимо от количества созданых/модифицированных/удаленных файлов/каталогов. </p>
+<p>Пример на Python, иллюстрирующий разницу между неатомарным и атомарным переносом функции между файлами:</p>
+<h3 id="_9">Исходное состояние</h3>
+<p><strong>file_a.py</strong></p>
+<pre><code class="language-python">def foo():
+    print(&quot;foo из file_a&quot;)
+
+def bar():
+    print(&quot;bar из file_a&quot;)
+</code></pre>
+<p><strong>file_b.py</strong></p>
+<pre><code class="language-python">def baz():
+    print(&quot;baz из file_b&quot;)
+</code></pre>
+<p><strong>main.py</strong></p>
+<pre><code class="language-python">from file_a import foo, bar
+from file_b import baz
+
+foo()
+bar()
+baz()
+</code></pre>
+<h2 id="1">Пример 1: Неатомарный перенос (код не работает)</h2>
+<p><strong>Шаг 1.</strong> Удаляем функцию <code>foo</code> из <code>file_a.py</code> (делаем коммит).</p>
+<p><strong>file_a.py</strong></p>
+<pre><code class="language-python">def bar():
+    print(&quot;bar из file_a&quot;)
+</code></pre>
+<p><strong>file_b.py</strong> (без изменений)</p>
+<pre><code class="language-python">def baz():
+    print(&quot;baz из file_b&quot;)
+</code></pre>
+<p><strong>main.py</strong> (без изменений)</p>
+<pre><code class="language-python">from file_a import foo, bar
+from file_b import baz
+
+foo()
+bar()
+baz()
+</code></pre>
+<p><strong>Результат:</strong><br />
+При запуске <code>main.py</code> возникает ошибка:</p>
+<blockquote>
+<p>ImportError: cannot import name 'foo' from 'file_a'</p>
+</blockquote>
+<p><strong>Причина:</strong><br />
+Функция удалена, но импорт в main.py не изменён. Код не работает.</p>
+<h2 id="2">Пример 2: Атомарный перенос (код работает)</h2>
+<p><strong>Шаг 1.</strong> Переносим функцию <code>foo</code> в <code>file_b.py</code> и корректируем все импорты (делаем один атомарный коммит).</p>
+<p><strong>file_a.py</strong></p>
+<pre><code class="language-python">def bar():
+    print(&quot;bar из file_a&quot;)
+</code></pre>
+<p><strong>file_b.py</strong></p>
+<pre><code class="language-python">def baz():
+    print(&quot;baz из file_b&quot;)
+
+def foo():
+    print(&quot;foo из file_b&quot;)
+</code></pre>
+<p><strong>main.py</strong></p>
+<pre><code class="language-python">from file_a import bar
+from file_b import baz, foo
+
+foo()
+bar()
+baz()
+</code></pre>
+<p><strong>Результат:</strong><br />
+Код запускается без ошибок, все функции доступны и работают как ожидается.</p>
+<p><strong>Вывод:</strong><br />
+В первом случае коммит неатомарный — функция удалена, но не добавлена в новый файл и не исправлены импорты, из-за чего код ломается.<br />
+Во втором случае коммит атомарный — все изменения внесены одновременно, код всегда находится в рабочем состоянии. </p>
+<p>Git все равно как сделан коммит, но если не учитывать атомарность фиксаций, репозиторий будет иметь переходные состояния.</p>
+<h2 id="_10">Идентификация фиксаций.</h2>
               
             </div>
           </div><footer>
