@@ -124,6 +124,12 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#_19">Достижимость в графах</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_20">Исключение коммитов и веток</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_21">Поиск коммитов</a>
     </li>
     </ul>
                   </li>
@@ -524,6 +530,54 @@ A &lt;- B &lt;- C &lt;-  E &lt;- F(main)
 </code></pre>
 <p>Команда <code>git log main</code> покажет историю из: F, E, C, B, A. Коммиты D, G будут не достижимы из F.</p>
 <p>Команда <code>git log branch</code> покажет историю из: G, E, D, C, B, A. Из G будет не достижим только коммит F.</p>
+<h3 id="_20">Исключение коммитов и веток</h3>
+<p>Для того чтобы исключить коммит и все достижимые из него узлы используется префикс <code>^</code>(в отличие от постфикса, указание на родителя).</p>
+<p>Например для ветки:</p>
+<p><code>A &lt;- B &lt;- C &lt;- main</code></p>
+<p><code>git log ^B main</code></p>
+<p>Будет выведено: main, C.</p>
+<p>При этом порядок не важен:
+                              │  <code>git log  main ^B</code></p>
+<p>Данная команда эквивалентна команде:</p>
+<p><code>git log B..main</code></p>
+<p>Рассмотрим диапазон конкретнее на других примерах.</p>
+<pre><code>      &lt;-G&lt;-D(branch)
+           /(merge to branch)   
+A &lt;- B &lt;- C &lt;-  E &lt;- F(main)
+
+</code></pre>
+<p>Команда <code>git log branch..main</code> выведет: F(main), E.
+Все узлы достижимые из branch, включая узел C в котором ветка branch была создана, будут исключены. </p>
+<p>Для случая:</p>
+<pre><code>    W&lt;-X&lt;-Y &lt;-Z (branch)
+      /        \
+A &lt;- B &lt;- C &lt;-  D(main)
+
+</code></pre>
+<p>Команда <code>git log branch..main</code> выведет: D(main), C. Потомучто все узлы достижимые из branch будут исключены, в том числе и Z(branch)</p>
+<p>Диапазон можно задавать в коротком варианте: <code>start..</code>, <code>..end</code>. Что эквивалентно <code>start..HEAD</code>, <code>HEAD..end</code> соотвественно.</p>
+<p>Так же запись диапазонна можно рассматривать как разницу:</p>
+<p><code>A &lt;- B &lt;- C &lt;- main</code></p>
+<p><code>git log B..main</code></p>
+<p>```A - B
+          C - main </p>
+<pre><code>
+### Симметричный диапазон(симметричная разница)
+
+Получается с помощью символа ```a...b``` - троеточие. Выводит те узлы которые доступны только  из start или доступны только из end, но не одновременно. При этом узлы a, b не являбтся ни концом ни началом. Поэтому  ```b...a``` будет эквивалентно ```a...b```
+
+</code></pre>
+<p>A &lt;- B &lt;- C &lt;- D&lt;- E &lt;-F&lt;-G(main)
+              \      /
+               U &lt;- V &lt;-X &lt;-Y(dev)
+```</p>
+<p>Из main достижимы:
+(G), (F), V, U, C, (E), (D), B, A
+Из dev достижимы|
+(Y), (X), V, U, C, B, A.</p>
+<p>в скобках помечены коммиты, которых нет в другой ветке.</p>
+<p>Соответсвенно команда <code>git log dev...main</code>, выведет коммииты: D, E, F, X, Y, G</p>
+<h2 id="_21">Поиск коммитов</h2>
               
             </div>
           </div><footer>
