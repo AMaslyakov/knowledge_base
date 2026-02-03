@@ -49,6 +49,18 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Справочник команд</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Сокращения и обозначени</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">Инициализация репозитория</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">Клонирование</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Коммит</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">Получение информации о репозитории</a>
+    </li>
     </ul>
                   </li>
               </ul>
@@ -86,6 +98,34 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="git">Команды git</h1>
+<h2 id="_1">Сокращения и обозначени</h2>
+<pre><code class="language-bash">[] - опциональный аргумент 
+&lt;name&gt; - название сущностей(ветка, файл, путь и т.д.)
+</code></pre>
+<h3 id="_2">Инициализация репозитория</h3>
+<pre><code class="language-bash">mkdir &lt;repo&gt;
+cd &lt;repo&gt;
+git init
+</code></pre>
+<h3 id="_3">Клонирование</h3>
+<pre><code class="language-bash">git clone &lt;url&gt; [dir]
+</code></pre>
+<h3 id="_4">Коммит</h3>
+<ol>
+<li>Добавить изменения в контекст </li>
+</ol>
+<pre><code class="language-bash">git add &lt;files&gt;
+</code></pre>
+<ol>
+<li>Сдлеать коммит</li>
+</ol>
+<p>Интерактивно </p>
+<pre><code class="language-bash">git commit
+</code></pre>
+<p>С сообщением</p>
+<pre><code class="language-bash">git commit -m &lt;message&gt;
+</code></pre>
+<h2 id="_5">Получение информации о репозитории</h2>
               
             </div>
           </div><footer>
