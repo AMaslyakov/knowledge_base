@@ -1049,4 +1049,42 @@ Git имеет свою версию diff, которая имеет нюанс�
 3.  ```--stat``` - статистика о строка и проч.
 4.  ```--color``` - вывод с подсветкой.
 
-#TODO самостоятельно написать пример для git diff, сравнить работу всех вариантов.
+### Пример для ```git diff```
+
+
+1. Создан репозиторий
+2. Добавлен файл python.md в индекс
+3. Произведен коммит.
+4. Создан файл clojure.md с содержимым
+```git diff```: пустой
+5. Файл clojure.md добавлен в индекс 
+```git diff```: пустой
+```git diff HEAD```:
+```text
+diff --git a/clojure.md b/clojure.md
+new file mode 100644
+index 0000000..60d5045
+--- /dev/null
++++ b/clojure.md
+@@ -0,0 +1,10 @@
++# The Clojure Programming Language
++
++Clojure is a dynamic, general-purpose programming language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming. Clojure is a compiled language, yet remains completely dynamic – every feature supported by Clojure is supported at runtime. Clojure ...```
+6. Добавлен файл lua.md в индекс
+7. Сделан коммит
+8. Изменен файл lua.md
+```git diff```: 
+```text
+diff --git a/lua.md b/lua.md
+index f195e55..acc434f 100644
+--- a/lua.md
++++ b/lua.md
+@@ -4,3 +4,6 @@
+
+Lua combines simple procedural syntax with powerful data description constructs based on associative arrays and extensible semantics. Lua is dynamically typed, runs by interpreting bytecode with a register-based virtual machine, and has automatic memory management with incremental garbage collection, making it ideal for configuration, scripting, and rapid prototyping. 
+ 
++## History
++
++Lua is designed, implemented, and maintained by a team at PUC-Rio, the Pontifical Catholic University of Rio de Janeiro in Brazil. Lua was born and raised in Tecgraf, formerly the Computer Graphics Technology Group of PUC-Rio. Lua is now housed at LabLua, a laboratory of the Department of Computer Science of PUC-:```
+
+
