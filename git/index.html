@@ -182,6 +182,12 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#gitdiff">Различия в Git(diff)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#git-diff">Git diff</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#git-diff_1">Пример для git diff</a>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -882,7 +888,89 @@ Detach HEAD создается в следующих случаях:</p>
 <p>Для ее удаления сначала нужно слить изменения с любой другой веткой.</p>
 <p>Указав -D можно удалить ветку в которой находятся коммиты отсутвующие в других ветках.</p>
 <h2 id="gitdiff">Различия в Git(diff)</h2>
-<p>NEXT TIME</p>
+<p>diff - программа сравнивающая два текстовых файла построчно, которая выводит отличия между фалйами в специльном виде.</p>
+<pre><code class="language-bash">--- test1.txt   2026-02-05 22:54:52.482529612 +0500
++++ test2.txt   2026-02-05 22:55:40.363810750 +0500
+@@ -5,6 +5,7 @@
+ Simple is better than complex.
+ Complex is better than complicated.
+ Flat is better than nested.
++
+ Sparse is better than dense.
+ Readability counts.
+ Special cases aren't special enough to break the rules.
+</code></pre>
+<p><code>---</code> обозначается исходный файл 
+<code>+++</code> обозначается изменный файл </p>
+<p><code>+</code> - Означает что в исходдный файл нужно добавить такую строку, до нового состояния</p>
+<p><code>-</code> - означает что нужно удалиь такую строку, чтобы получить состояние нового файла.</p>
+<h3 id="git-diff">Git diff</h3>
+<p>Git имеет свою версию diff, которая имеет нюансы и особенности.</p>
+<p><code>git diff</code> может быть использан со следующими источниками:
+- Любой объект дерева(коммит, ветка, ссылка, тег и т.д.)
+- Рабочий каталог
+- Индекс</p>
+<ol>
+<li><code>git diff</code> - показывает изменния между индексом и текущим состоянием рабочего каталога(то что станет или может стать коммитом).</li>
+<li><code>git diff &lt;commit&gt;</code> - показывает изменения между состояние рабочего каталога и указанного коммита.</li>
+<li><code>git diff --cached &lt;commit&gt;</code> - разница между добавлеными в индекс данными и коммитом. Если коммит не указан, используется HEAD. </li>
+<li><code>git diff &lt;commit1&gt; &lt;commit2&gt;</code> - показывает разницу между двумя коммитами.</li>
+</ol>
+<p><em>Полезные опции</em></p>
+<ol>
+<li><code>--M</code> - изменения в переименовании файлов.</li>
+<li><code>-w(--ignore-all-space)</code> - сравнение строк без учета пробелов</li>
+<li><code>--stat</code> - статистика о строка и проч.</li>
+<li><code>--color</code> - вывод с подсветкой.</li>
+</ol>
+<h3 id="git-diff_1">Пример для <code>git diff</code></h3>
+<ol>
+<li>Создан репозиторий</li>
+<li>Добавлен файл python.md в индекс</li>
+<li>Произведен коммит.</li>
+<li>Создан файл clojure.md с содержимым
+<code>git diff</code>: пустой</li>
+<li>Файл clojure.md добавлен в индекс 
+<code>git diff</code>: пустой
+<code>git diff HEAD</code>:</li>
+</ol>
+<pre><code class="language-text">diff --git a/clojure.md b/clojure.md
+new file mode 100644
+index 0000000..60d5045
+--- /dev/null
++++ b/clojure.md
+@@ -0,0 +1,10 @@
++# The Clojure Programming Language
++
++Clojure is a dynamic, general-purpose programming language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming. Clojure is a compiled language, yet remains completely dynamic – every feature supported by Clojure is supported at runtime. Clojure ...```
+6. Добавлен файл lua.md в индекс
+7. Сделан коммит
+8. Изменен файл lua.md
+```git diff```: 
+```text
+diff --git a/lua.md b/lua.md
+index f195e55..acc434f 100644
+--- a/lua.md
++++ b/lua.md
+@@ -4,3 +4,6 @@
+
+Lua combines simple procedural syntax with powerful data description constructs based on associative arrays and extensible semantics. Lua is dynamically typed, runs by interpreting bytecode with a register-based virtual machine, and has automatic memory management with incremental garbage collection, making it ideal for configuration, scripting, and rapid prototyping. 
+
++## History
++
++Lua is designed, implemented, and maintained by a team at PUC-Rio, the Pontifical Catholic University of Rio de Janeiro in Brazil. Lua was born and raised in Tecgraf, formerly the Computer Graphics Technology Group of PUC-Rio. Lua is now housed at LabLua, a laboratory of the Department of Computer Science of PUC-:```
+
+
+### ```git diff``` и диапазонны фиксаций
+
+Эквивалентны следующие комнды:
+
+```bash
+git diff main bug/pr1
+git diff main..bug/pr1
+</code></pre>
+<p>Диапазон в git diff игнроируется. 
+Будет показана разница только между двумя коммитами <code>main bug/pr1</code>.</p>
               
             </div>
           </div><footer>

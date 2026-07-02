@@ -49,17 +49,73 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Справочник команд</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">Сокращения и обозначени</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Сокращения и обозначения</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Пошаговая работа с репозиторием</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#_2">Инициализация репозитория</a>
+    <li class="toctree-l3"><a class="reference internal" href="#1">Шаг 1. Инициализация репозитория</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_3">Клонирование</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2">Шаг 2. Добавление файлов в индекс и создание коммита</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_4">Коммит</a>
+    <li class="toctree-l3"><a class="reference internal" href="#3">Шаг 3. Работа с удаленным репозиторием</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#31">3.1 Проверка и добавление удаленных репозиториев</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#32-origin-upstream">3.2 Назначение origin и upstream</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#33-originmain">3.3 Удаленные ветки и origin/main</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#34">3.4 Публикация и синхронизация</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_5">Получение информации о репозитории</a>
+    <li class="toctree-l3"><a class="reference internal" href="#4">Шаг 4. Работа с ветками</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#41">4.1 Просмотр и создание веток</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#42">4.2 Переключение между ветками</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#43">4.3 Слияние веток</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#44">4.4 Удаление и очистка веток</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-merge-">Шаг 5. Merge-конфликты: обнаружение и разрешение</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#51">5.1 Как понять, что есть конфликт</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#52">5.2 Базовый порядок разрешения</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#53">5.3 Подключение инструментов разрешения конфликтов</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#54">5.4 Окружение и временное переключение инструмента</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-git">Шаг 6. Конфигурация Git и правила игнорирования</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#61-git">6.1 Три уровня конфигурации Git</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#62-gitignore">6.2 Где размещать .gitignore</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#63">6.3 Каскадные правила и отмена через !</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#7">Шаг 7. Откат изменений</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#71-unstage">7.1 Откат файлов, добавленных в индекс (unstage)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#72">7.2 Откат файлов, не добавленных в индекс</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#73">7.3 Полный откат файла: и из индекса, и из рабочей директории</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#74">7.4 Откат конкретного файла к состоянию из конкретного коммита</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -98,34 +154,272 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="git">Команды git</h1>
-<h2 id="_1">Сокращения и обозначени</h2>
-<pre><code class="language-bash">[] - опциональный аргумент 
-&lt;name&gt; - название сущностей(ветка, файл, путь и т.д.)
+<h2 id="_1">Сокращения и обозначения</h2>
+<pre><code class="language-bash">[] - опциональный аргумент
+&lt;name&gt; - имя сущности (ветка, файл, путь и т.д.)
 </code></pre>
-<h3 id="_2">Инициализация репозитория</h3>
+<h2 id="_2">Пошаговая работа с репозиторием</h2>
+<h3 id="1">Шаг 1. Инициализация репозитория</h3>
+<p><strong>Когда использовать:</strong> начинаешь новый проект локально (без удаленного репозитория).</p>
 <pre><code class="language-bash">mkdir &lt;repo&gt;
-cd &lt;repo&gt;
-git init
 </code></pre>
-<h3 id="_3">Клонирование</h3>
-<pre><code class="language-bash">git clone &lt;url&gt; [dir]
+<p>Создает папку проекта.</p>
+<pre><code class="language-bash">cd &lt;repo&gt;
 </code></pre>
-<h3 id="_4">Коммит</h3>
-<ol>
-<li>Добавить изменения в контекст </li>
-</ol>
-<pre><code class="language-bash">git add &lt;files&gt;
+<p>Переходит в рабочую директорию проекта.</p>
+<pre><code class="language-bash">git init
 </code></pre>
-<ol>
-<li>Сдлеать коммит</li>
-</ol>
-<p>Интерактивно </p>
-<pre><code class="language-bash">git commit
+<p>Инициализирует Git-репозиторий в текущей папке и создает скрытую директорию <code>.git/</code>.</p>
+<pre><code class="language-bash">git status
 </code></pre>
-<p>С сообщением</p>
-<pre><code class="language-bash">git commit -m &lt;message&gt;
+<p>Показывает текущее состояние репозитория: ветку, отслеживаемые и неотслеживаемые файлы.</p>
+<p><strong>Результат шага:</strong> создан локальный репозиторий, готовый к первому коммиту.</p>
+<h3 id="2">Шаг 2. Добавление файлов в индекс и создание коммита</h3>
+<p><strong>Когда использовать:</strong> после изменений в файлах, перед фиксацией в истории.</p>
+<pre><code class="language-bash">git status
 </code></pre>
-<h2 id="_5">Получение информации о репозитории</h2>
+<p>Показывает, какие файлы изменены и какие уже в индексе (staged).</p>
+<pre><code class="language-bash">git add &lt;file&gt;
+</code></pre>
+<p>Добавляет конкретный файл в индекс. Для всех изменений можно использовать <code>git add .</code>.</p>
+<pre><code class="language-bash">git ls-files --stage
+</code></pre>
+<p>Показывает содержимое индекса: какие файлы подготовлены и с какими blob-хэшами.</p>
+<pre><code class="language-bash">git diff
+</code></pre>
+<p>Сравнивает рабочую директорию с индексом (что изменено, но <strong>еще не добавлено</strong> через <code>git add</code>).
+Если команда ничего не выводит — все текущие правки уже попали в индекс.</p>
+<pre><code class="language-bash">git diff --cached
+</code></pre>
+<p>Сравнивает индекс с последним коммитом (<code>HEAD</code>) и показывает, <strong>что именно попадет в новый коммит</strong>.
+Это ключевая проверка перед <code>git commit</code>, особенно если изменений много.</p>
+<pre><code class="language-bash">git commit -m &quot;&lt;message&gt;&quot;
+</code></pre>
+<p>Создает коммит из текущего состояния индекса.</p>
+<p><strong>Результат шага:</strong> нужные изменения добавлены в индекс и зафиксированы в истории.</p>
+<h3 id="3">Шаг 3. Работа с удаленным репозиторием</h3>
+<p><strong>Когда использовать:</strong> при публикации локальных коммитов, синхронизации и работе с внешними репозиториями.</p>
+<h4 id="31">3.1 Проверка и добавление удаленных репозиториев</h4>
+<pre><code class="language-bash">git remote -v
+</code></pre>
+<p>Показывает список подключенных удаленных репозиториев и их URL.</p>
+<pre><code class="language-bash">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git
+</code></pre>
+<p>Добавляет основной удаленный репозиторий <code>origin</code> по HTTPS.</p>
+<pre><code class="language-bash">git remote add origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git
+</code></pre>
+<p>Добавляет <code>origin</code> по SSH.</p>
+<pre><code class="language-bash">git remote add upstream https://github.com/&lt;owner&gt;/&lt;repo&gt;.git
+</code></pre>
+<p>Добавляет второй удаленный репозиторий <code>upstream</code> (часто используется при работе с форком).</p>
+<pre><code class="language-bash">git remote set-url origin git@github.com:&lt;user&gt;/&lt;repo&gt;.git
+</code></pre>
+<p>Меняет URL существующего <code>origin</code>, например с HTTPS на SSH.</p>
+<h4 id="32-origin-upstream">3.2 Назначение origin и upstream</h4>
+<ul>
+<li><code>origin</code> — основной удаленный репозиторий локального проекта (обычно собственный репозиторий или форк).</li>
+<li><code>upstream</code> — исходный репозиторий, откуда регулярно подтягиваются изменения.</li>
+<li>Имена <code>origin</code> и <code>upstream</code> — соглашение, а не обязательное правило; технически можно использовать любое имя.</li>
+</ul>
+<h4 id="33-originmain">3.3 Удаленные ветки и <code>origin/main</code></h4>
+<pre><code class="language-bash">git fetch origin
+</code></pre>
+<p>Обновляет сведения о ветках на удаленном <code>origin</code> без изменения рабочей директории.</p>
+<pre><code class="language-bash">git branch -r
+</code></pre>
+<p>Показывает удаленные ветки (<code>origin/main</code>, <code>origin/dev</code>, <code>upstream/main</code> и т.д.).</p>
+<p><code>origin/main</code> — это <strong>remote-tracking branch</strong> в локальном репозитории:
+- хранит локальный снимок состояния ветки <code>main</code> на сервере <code>origin</code>;
+- обновляется командами <code>git fetch</code> и <code>git pull</code>;
+- используется как опорная точка для сравнения и синхронизации (<code>git diff main origin/main</code>).</p>
+<h4 id="34">3.4 Публикация и синхронизация</h4>
+<pre><code class="language-bash">git push -u origin main
+</code></pre>
+<p>Публикует локальную ветку <code>main</code> в <code>origin</code> и связывает ее с удаленной веткой.</p>
+<pre><code class="language-bash">git pull --rebase origin main
+</code></pre>
+<p>Подтягивает изменения из <code>origin/main</code> и применяет локальные коммиты поверх обновленной истории.</p>
+<pre><code class="language-bash">git fetch upstream
+git merge upstream/main
+</code></pre>
+<p>Обновляет локальную ветку изменениями из исходного репозитория <code>upstream</code>.</p>
+<p><strong>Результат шага:</strong> локальный репозиторий связан с удаленными источниками, настроены <code>origin</code>/<code>upstream</code>, выполнена базовая синхронизация веток.</p>
+<h3 id="4">Шаг 4. Работа с ветками</h3>
+<p><strong>Когда использовать:</strong> при параллельной разработке задач, изоляции изменений и подготовке к слиянию.</p>
+<h4 id="41">4.1 Просмотр и создание веток</h4>
+<pre><code class="language-bash">git branch
+</code></pre>
+<p>Показывает локальные ветки и отмечает текущую ветку.</p>
+<pre><code class="language-bash">git branch &lt;new-branch&gt;
+</code></pre>
+<p>Создает новую ветку от текущего коммита.</p>
+<pre><code class="language-bash">git branch &lt;new-branch&gt; &lt;commit&gt;
+</code></pre>
+<p>Создает ветку от указанного коммита (удобно для возврата к нужной точке истории).</p>
+<h4 id="42">4.2 Переключение между ветками</h4>
+<pre><code class="language-bash">git checkout &lt;branch&gt;
+</code></pre>
+<p>Переключает рабочую директорию на выбранную ветку.</p>
+<pre><code class="language-bash">git checkout -b &lt;new-branch&gt;
+</code></pre>
+<p>Создает новую ветку и сразу переключает на нее.</p>
+<pre><code class="language-bash">git checkout -m &lt;branch&gt;
+</code></pre>
+<p>Пытается переключить ветку с сохранением локальных незакоммиченных изменений.</p>
+<h4 id="43">4.3 Слияние веток</h4>
+<pre><code class="language-bash">git checkout main
+git merge &lt;feature-branch&gt;
+</code></pre>
+<p>Вливает изменения из рабочей ветки в <code>main</code>.</p>
+<pre><code class="language-bash">git merge-base main &lt;feature-branch&gt;
+</code></pre>
+<p>Показывает общий базовый коммит двух веток. Полезно при анализе истории и сложных конфликтов.</p>
+<pre><code class="language-bash">git diff main...&lt;feature-branch&gt;
+</code></pre>
+<p>Показывает различия относительно общей базы веток (удобно для проверки объема изменений перед merge).</p>
+<h4 id="44">4.4 Удаление и очистка веток</h4>
+<pre><code class="language-bash">git branch -d &lt;branch&gt;
+</code></pre>
+<p>Удаляет локальную ветку, если она уже слита.</p>
+<pre><code class="language-bash">git branch -D &lt;branch&gt;
+</code></pre>
+<p>Принудительно удаляет локальную ветку, даже если она не слита.</p>
+<pre><code class="language-bash">git push origin --delete &lt;branch&gt;
+</code></pre>
+<p>Удаляет удаленную ветку в <code>origin</code>.</p>
+<p><strong>Результат шага:</strong> ветки используются для изоляции задач, изменения безопасно переключаются и корректно сливаются в основную линию разработки.</p>
+<h3 id="5-merge-">Шаг 5. Merge-конфликты: обнаружение и разрешение</h3>
+<p><strong>Когда использовать:</strong> при <code>merge</code>, <code>pull</code> или <code>rebase</code>, если Git не может автоматически объединить изменения.</p>
+<h4 id="51">5.1 Как понять, что есть конфликт</h4>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>Показывает файлы в конфликте (<code>both modified</code> и похожие статусы).</p>
+<pre><code class="language-bash">git diff --name-only --diff-filter=U
+</code></pre>
+<p>Выводит только список неразрешенных конфликтов.</p>
+<p>Внутри конфликтного файла появляются маркеры:
+- <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> — текущая версия;
+- <code>=======</code> — разделитель;
+- <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; &lt;branch&gt;</code> — версия из вливаемой ветки.</p>
+<h4 id="52">5.2 Базовый порядок разрешения</h4>
+<pre><code class="language-bash">git merge &lt;feature-branch&gt;
+</code></pre>
+<p>Запускает слияние и может остановиться на конфликте.</p>
+<pre><code class="language-bash">git checkout --ours &lt;file&gt;
+</code></pre>
+<p>Оставляет локальную версию файла.</p>
+<pre><code class="language-bash">git checkout --theirs &lt;file&gt;
+</code></pre>
+<p>Оставляет версию из вливаемой ветки.</p>
+<pre><code class="language-bash">git add &lt;file&gt;
+</code></pre>
+<p>Помечает конфликт как решенный для конкретного файла.</p>
+<pre><code class="language-bash">git merge --continue
+</code></pre>
+<p>Продолжает merge после разрешения всех конфликтов.</p>
+<pre><code class="language-bash">git merge --abort
+</code></pre>
+<p>Отменяет merge и возвращает состояние до начала слияния.</p>
+<p>Для <code>rebase</code> используются команды <code>git rebase --continue</code> и <code>git rebase --abort</code>.</p>
+<h4 id="53">5.3 Подключение инструментов разрешения конфликтов</h4>
+<h5 id="meld">Meld</h5>
+<pre><code class="language-bash">git config --global merge.tool meld
+git config --global mergetool.prompt false
+git config --global mergetool.keepBackup false
+git mergetool
+</code></pre>
+<p>Настраивает <code>meld</code> как инструмент merge и запускает визуальное разрешение конфликтов.</p>
+<h5 id="vimdiff">Vimdiff</h5>
+<pre><code class="language-bash">git config --global merge.tool vimdiff
+git config --global mergetool.vimdiff.layout &quot;LOCAL,BASE,REMOTE / MERGED&quot;
+git mergetool
+</code></pre>
+<p>Настраивает <code>vimdiff</code> для четырехпанельного сравнения и редактирования.</p>
+<h4 id="54">5.4 Окружение и временное переключение инструмента</h4>
+<pre><code class="language-bash">GIT_MERGETOOL=vimdiff git mergetool
+</code></pre>
+<p>Временно запускает <code>mergetool</code> через <code>vimdiff</code>, без изменения глобальной конфигурации.</p>
+<pre><code class="language-bash">export VISUAL=vim
+export EDITOR=vim
+</code></pre>
+<p>Задает редактор для сообщений merge/rebase и ручного редактирования конфликтных файлов.</p>
+<p><strong>Результат шага:</strong> конфликты обнаруживаются заранее, разрешаются по понятной схеме и при необходимости обрабатываются через визуальные инструменты.</p>
+<h3 id="6-git">Шаг 6. Конфигурация Git и правила игнорирования</h3>
+<p><strong>Когда использовать:</strong> при первичной настройке Git, стандартизации поведения и фильтрации служебных файлов.</p>
+<h4 id="61-git">6.1 Три уровня конфигурации Git</h4>
+<p>Git читает конфигурацию каскадно (от общего к частному):
+1. <strong>System</strong> — системный уровень, обычно <code>/etc/gitconfig</code>.
+2. <strong>Global</strong> — пользовательский уровень, обычно <code>~/.gitconfig</code>.
+3. <strong>Local</strong> — уровень конкретного репозитория, файл <code>.git/config</code>.</p>
+<p>Локальные настройки имеют наивысший приоритет и переопределяют глобальные и системные.</p>
+<pre><code class="language-bash">git config --list --show-origin
+</code></pre>
+<p>Показывает все активные настройки и путь к файлу, откуда взято каждое значение.</p>
+<pre><code class="language-bash">git config --system user.name &quot;Team Default&quot;
+</code></pre>
+<p>Записывает значение на системном уровне (для всех пользователей машины).</p>
+<pre><code class="language-bash">git config --global user.name &quot;Alice Dev&quot;
+git config --global user.email &quot;alice@example.com&quot;
+</code></pre>
+<p>Записывает имя и email на уровне текущего пользователя.</p>
+<pre><code class="language-bash">git config --local user.name &quot;Project Bot&quot;
+</code></pre>
+<p>Записывает значение только для текущего репозитория (<code>.git/config</code>).</p>
+<h4 id="62-gitignore">6.2 Где размещать <code>.gitignore</code></h4>
+<ul>
+<li><code>./.gitignore</code> в корне репозитория — базовые правила проекта.</li>
+<li><code>./subdir/.gitignore</code> во вложенных папках — локальные правила для конкретной директории и ее поддерева.</li>
+<li><code>.git/info/exclude</code> — локальные исключения только для текущего репозитория (не коммитится).</li>
+<li>Глобальный ignore-файл пользователя (через <code>core.excludesFile</code>) — общие личные правила для всех репозиториев, например <code>~/.gitignore_global</code>.</li>
+</ul>
+<pre><code class="language-bash">git config --global core.excludesFile ~/.gitignore_global
+</code></pre>
+<p>Подключает глобальный файл игнорирования.</p>
+<h4 id="63">6.3 Каскадные правила и отмена через <code>!</code></h4>
+<p>Каскадные правила означают, что Git проверяет несколько источников правил; более специфичные и более поздние совпадения переопределяют предыдущие.</p>
+<p>Пример:</p>
+<pre><code class="language-gitignore"># Игнорировать все логи
+*.log
+
+# Но сохранить важный лог в репозитории
+!important.log
+</code></pre>
+<p><code>!pattern</code> отменяет предыдущее игнорирование для совпадающего пути.</p>
+<p><strong>Результат шага:</strong> конфигурация Git разделена по уровням, правила игнорирования управляются предсказуемо и без лишнего шума в <code>git status</code>.</p>
+<h3 id="7">Шаг 7. Откат изменений</h3>
+<p><strong>Когда использовать:</strong> при ошибочных правках, неверном добавлении в индекс или необходимости вернуть файл к предыдущей версии.</p>
+<h4 id="71-unstage">7.1 Откат файлов, добавленных в индекс (unstage)</h4>
+<pre><code class="language-bash">git restore --staged &lt;file&gt;
+</code></pre>
+<p>Убирает файл из индекса, но оставляет изменения в рабочей директории.</p>
+<pre><code class="language-bash">git reset HEAD &lt;file&gt;
+</code></pre>
+<p>Альтернативный способ снять файл с индекса (часто встречается в старых инструкциях).</p>
+<h4 id="72">7.2 Откат файлов, не добавленных в индекс</h4>
+<pre><code class="language-bash">git restore &lt;file&gt;
+</code></pre>
+<p>Отменяет незакоммиченные изменения файла в рабочей директории и возвращает состояние из индекса.</p>
+<pre><code class="language-bash">git restore .
+</code></pre>
+<p>Отменяет все незакоммиченные изменения в текущей директории и вложенных папках.</p>
+<h4 id="73">7.3 Полный откат файла: и из индекса, и из рабочей директории</h4>
+<pre><code class="language-bash">git restore --staged &lt;file&gt;
+git restore &lt;file&gt;
+</code></pre>
+<p>Последовательно убирает файл из индекса и затем откатывает его содержимое в рабочей директории.</p>
+<h4 id="74">7.4 Откат конкретного файла к состоянию из конкретного коммита</h4>
+<pre><code class="language-bash">git restore --source &lt;commit&gt; -- &lt;file&gt;
+</code></pre>
+<p>Берет версию файла из указанного коммита и записывает ее в рабочую директорию.</p>
+<pre><code class="language-bash">git add &lt;file&gt;
+git commit -m &quot;restore &lt;file&gt; from &lt;commit&gt;&quot;
+</code></pre>
+<p>Фиксирует восстановленную версию отдельным коммитом.</p>
+<p>Пример:</p>
+<pre><code class="language-bash">git restore --source a1b2c3d -- docs/commands.md
+</code></pre>
+<p>Восстанавливает <code>docs/commands.md</code> из коммита <code>a1b2c3d</code>.</p>
+<p><strong>Результат шага:</strong> изменения откатываются точно на нужном уровне — индекс, рабочая директория или конкретная версия файла из истории.</p>
               
             </div>
           </div><footer>
